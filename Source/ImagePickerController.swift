@@ -370,7 +370,6 @@ extension ImagePickerController: BottomContainerViewDelegate {
   }
 
   func doneButtonDidPress() {
-    cameraController.removeFromParent()
     showActivityIndicator()
     view.isUserInteractionEnabled = false
     
