@@ -370,6 +370,10 @@ extension ImagePickerController: BottomContainerViewDelegate {
   }
 
   func doneButtonDidPress() {
+    cameraController.removeFromParent()
+    showActivityIndicator()
+    view.isUserInteractionEnabled = false
+    
     var images: [UIImage]
     if let preferredImageSize = preferredImageSize {
       images = AssetManager.resolveAssets(stack.assets, size: preferredImageSize)
@@ -537,5 +541,13 @@ extension ImagePickerController: ImageGalleryPanGestureDelegate {
     } else if velocity.y > GestureConstants.velocity || galleryHeight < GestureConstants.minimumHeight {
       collapseGalleryView(nil)
     }
+  }
+
+  // MARK: - Activity Indicator
+  func showActivityIndicator() {
+    let activityView = UIActivityIndicatorView(style: .whiteLarge)
+    activityView.center = view.center
+    view.addSubview(activityView)
+    activityView.startAnimating()
   }
 }
